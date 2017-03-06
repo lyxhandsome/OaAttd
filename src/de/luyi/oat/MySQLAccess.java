@@ -35,17 +35,15 @@ public class MySQLAccess {
 			// td_oa.comments");
 			// Parameters start with 1
 			long t = new Date().getTime();
-			Date date = new Date(t);
-			System.out.println(date);
 			
-			GregorianCalendar g = new GregorianCalendar();
+			GregorianCalendar gcal = new GregorianCalendar(2016,0,5,20,20,23);
+			Date date = gcal.getGregorianChange();
+			System.out.println(date);
 			
 			preparedStatement.setString(1, "Test");
 			preparedStatement.setString(2, "TestEmail");
 			preparedStatement.setString(3, "TestWebpage");
-			
-			preparedStatement.setDate(4, new java.sql.Date(t));
-			
+			preparedStatement.setDate(4, new java.sql.Date(gcal.getGregorianChange().getTime()));
 			preparedStatement.setString(5, "TestSummary");
 			preparedStatement.setString(6, "TestComment");
 			preparedStatement.executeUpdate();
