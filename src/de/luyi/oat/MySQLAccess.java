@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class MySQLAccess {
 	private Connection connect = null;
@@ -33,10 +34,18 @@ public class MySQLAccess {
 			// "myuser, webpage, datum, summary, COMMENTS from
 			// td_oa.comments");
 			// Parameters start with 1
+			long t = new Date().getTime();
+			Date date = new Date(t);
+			System.out.println(date);
+			
+			GregorianCalendar g = new GregorianCalendar();
+			
 			preparedStatement.setString(1, "Test");
 			preparedStatement.setString(2, "TestEmail");
 			preparedStatement.setString(3, "TestWebpage");
-			preparedStatement.setDate(4, new java.sql.Date(2009, 12, 11));
+			
+			preparedStatement.setDate(4, new java.sql.Date(t));
+			
 			preparedStatement.setString(5, "TestSummary");
 			preparedStatement.setString(6, "TestComment");
 			preparedStatement.executeUpdate();
@@ -47,7 +56,7 @@ public class MySQLAccess {
 			writeResultSet(resultSet);
 
 			// Remove again the insert comment
-			preparedStatement = connect.prepareStatement("delete from td_oa.comments where myuser= ? ; ");
+			preparedStatement = connect.prepareStatement("delete from td_oa.comments where myuser=?; ");
 			preparedStatement.setString(1, "Test");
 			preparedStatement.executeUpdate();
 
@@ -65,7 +74,6 @@ public class MySQLAccess {
 	private void writeMetaData(ResultSet resultSet) throws SQLException {
 		// Now get some metadata from the database
 		// Result set get the result of the SQL query
-
 		System.out.println("The columns in the table are: ");
 		System.out.println("Table: " + resultSet.getMetaData().getTableName(1));
 		for (int i = 1; i <= resultSet.getMetaData().getColumnCount(); i++) {
