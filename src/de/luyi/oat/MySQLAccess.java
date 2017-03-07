@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -34,16 +35,15 @@ public class MySQLAccess {
 			// "myuser, webpage, datum, summary, COMMENTS from
 			// td_oa.comments");
 			// Parameters start with 1
-			long t = new Date().getTime();
-			
-			GregorianCalendar gcal = new GregorianCalendar(2016,0,5,20,20,23);
-			Date date = gcal.getGregorianChange();
-			System.out.println(date);
+
+			Calendar cal = Calendar.getInstance();
+			cal.set(2008, 1, 7, 1, 6, 7);
+			long time = cal.getTime().getTime();
 			
 			preparedStatement.setString(1, "Test");
 			preparedStatement.setString(2, "TestEmail");
 			preparedStatement.setString(3, "TestWebpage");
-			preparedStatement.setDate(4, new java.sql.Date(gcal.getGregorianChange().getTime()));
+			preparedStatement.setDate(4, new java.sql.Date(time));
 			preparedStatement.setString(5, "TestSummary");
 			preparedStatement.setString(6, "TestComment");
 			preparedStatement.executeUpdate();
