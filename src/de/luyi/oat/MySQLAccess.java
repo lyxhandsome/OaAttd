@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 public class MySQLAccess {
 	private Connection connect = null;
@@ -37,8 +36,6 @@ public class MySQLAccess {
 			long t = new Date().getTime();
 			Date date = new Date(t);
 			System.out.println(date);
-			
-			GregorianCalendar g = new GregorianCalendar();
 			
 			preparedStatement.setString(1, "Test");
 			preparedStatement.setString(2, "TestEmail");
