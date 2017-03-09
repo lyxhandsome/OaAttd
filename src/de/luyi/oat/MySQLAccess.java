@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
 import java.util.Date;
 
 public class MySQLAccess {
@@ -36,13 +37,15 @@ public class MySQLAccess {
 			long t = new Date().getTime();
 			Date date = new Date(t);
 			System.out.println(date);
+
+			Calendar cal = Calendar.getInstance();
+			cal.set(2008, 1, 7, 1, 6, 7);
+			long time = cal.getTime().getTime();
 			
 			preparedStatement.setString(1, "Test");
 			preparedStatement.setString(2, "TestEmail");
 			preparedStatement.setString(3, "TestWebpage");
-			
-			preparedStatement.setDate(4, new java.sql.Date(t));
-			
+			preparedStatement.setDate(4, new java.sql.Date(time));
 			preparedStatement.setString(5, "TestSummary");
 			preparedStatement.setString(6, "TestComment");
 			preparedStatement.executeUpdate();
