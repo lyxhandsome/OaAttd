@@ -8,53 +8,49 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class NotPrepared {
-	public void run() {
-
-		Connection con = null;
-		Statement st = null;
-
-		String cs = "jdbc:mysql://localhost:3336/td_oa";
-		String user = "root";
-		String password = "myoa888";
-
-		try {
-
-			con = DriverManager.getConnection(cs, user, password);
-			st = con.createStatement();
-			
-			String query0 = "CREATE TABLE IF NOT EXISTS Authors(Id INT PRIMARY KEY AUTO_INCREMENT, NAME VARCHAR(25)) ENGINE=InnoDB;";
-			st.execute(query0);
-			String query1 = "DROP TABLE IF EXISTS Books, Authors, Testing, Images"; 
-			st.execute(query1);
-
-//			for (int i = 1; i <= 1000; i++) {
+//	public static void  main(String[] args) {
 //
+//		Connection con = null;
+//		Statement st = null;
+//
+//		String cs = "jdbc:mysql://localhost:3336/td_oa";
+//		String user = "root";
+//		String password = "myoa888";
+//
+//		try {
+//
+//			con = DriverManager.getConnection(cs, user, password);
+//			st = con.createStatement();
+//
+//			for (int i = 1; i <= 1000; i++) {
 //				String query = "INSERT INTO Testing(Id) VALUES(" + 2 * i + ")";
 //				st.executeUpdate(query);
 //			}
-
-		} catch (SQLException ex) {
-
-			Logger lgr = Logger.getLogger(NotPrepared.class.getName());
-			lgr.log(Level.SEVERE, ex.getMessage(), ex);
-
-		} finally {
-
-			try {
-
-				if (st != null) {
-					st.close();
-				}
-
-				if (con != null) {
-					con.close();
-				}
-
-			} catch (SQLException ex) {
-
-				Logger lgr = Logger.getLogger(NotPrepared.class.getName());
-				lgr.log(Level.SEVERE, ex.getMessage(), ex);
-			}
-		}
-	}
+//			
+//			
+//
+//		} catch (SQLException ex) {
+//
+//			Logger lgr = Logger.getLogger(NotPrepared.class.getName());
+//			lgr.log(Level.SEVERE, ex.getMessage(), ex);
+//
+//		} finally {
+//
+//			try {
+//
+//				if (st != null) {
+//					st.close();
+//				}
+//
+//				if (con != null) {
+//					con.close();
+//				}
+//
+//			} catch (SQLException ex) {
+//
+//				Logger lgr = Logger.getLogger(NotPrepared.class.getName());
+//				lgr.log(Level.SEVERE, ex.getMessage(), ex);
+//			}
+//		}
+//	}
 }
