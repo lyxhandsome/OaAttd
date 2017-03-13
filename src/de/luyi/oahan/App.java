@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class App {
-
 	public static void main(String[] args) {
 		String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=master;user=sa;password=myoa888";
 
