@@ -1,5 +1,5 @@
 package de.luyi.oahan;
 
-public class oahan {
+public class OAHan {
 
 }
