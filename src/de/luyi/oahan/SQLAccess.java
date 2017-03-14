@@ -26,6 +26,13 @@ public class SQLAccess {
 			Class.forName("com.mysql.jdbc.Driver");
 			// Setup the connection with the DB
 			mysqlConnect = DriverManager.getConnection("jdbc:mysql://localhost:3336/td_oa?" + "user=root&password=myoa888");
+			
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  
+			mssqlConnect = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;"
+					+ "databaseName=hwatt;user=sa;password=myoa888"); 
+			
+			
+			
 
 			// Statements allow to issue SQL queries to the database
 			mysqlStatement = mysqlConnect.createStatement();
@@ -39,10 +46,6 @@ public class SQLAccess {
 			// "myuser, webpage, datum, summary, COMMENTS from
 			// td_oa.comments");
 			// Parameters start with 1
-			long t = new Date().getTime();
-			Date date = new Date(t);
-			System.out.println(date);
-
 			Calendar cal = Calendar.getInstance();
 			cal.set(2008, 1, 7, 1, 6, 7);
 			long time = cal.getTime().getTime();
