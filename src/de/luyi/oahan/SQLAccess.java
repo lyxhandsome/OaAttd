@@ -19,6 +19,8 @@ public class SQLAccess {
 	private Statement mssqlStatement = null;
 	private PreparedStatement mssqlPreparedStatement = null;
 	private ResultSet mssqlResultSet = null;
+	
+	private KQZ_Vacation kva;
 
 	public void readDataBase() throws Exception {
 		try {
@@ -31,45 +33,47 @@ public class SQLAccess {
 			mssqlConnect = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;"
 					+ "databaseName=hwatt;user=sa;password=myoa888"); 
 			
-			
-			
-
 			// Statements allow to issue SQL queries to the database
 			mysqlStatement = mysqlConnect.createStatement();
 			// Result set get the result of the SQL query
-			mysqlResultSet = mysqlStatement.executeQuery("select * from td_oa.comments");
-			writeResultSet(mysqlResultSet);
-
-			// PreparedStatements can use variables and are more efficient
-			mysqlPreparedStatement = mysqlConnect
-					.prepareStatement("insert into  td_oa.comments values (default, ?, ?, ?, ? , ?, ?)");
-			// "myuser, webpage, datum, summary, COMMENTS from
-			// td_oa.comments");
-			// Parameters start with 1
-			Calendar cal = Calendar.getInstance();
-			cal.set(2008, 1, 7, 1, 6, 7);
-			long time = cal.getTime().getTime();
+			mysqlResultSet = mysqlStatement.executeQuery("SELECT * FROM flow_data_41 WHERE data_34=0;");
+			while (mysqlResultSet.next()) {
+				kva.setEmployeeID(mysqlResultSet.getInt(2));
+				
+			}
 			
-			mysqlPreparedStatement.setString(1, "Test");
-			mysqlPreparedStatement.setString(2, "TestEmail");
-			mysqlPreparedStatement.setString(3, "TestWebpage");
-			mysqlPreparedStatement.setDate(4, new java.sql.Date(time));
-			mysqlPreparedStatement.setString(5, "TestSummary");
-			mysqlPreparedStatement.setString(6, "TestComment");
-			mysqlPreparedStatement.executeUpdate();
-
-			mysqlPreparedStatement = mysqlConnect
-					.prepareStatement("SELECT myuser, webpage, datum, summary, COMMENTS from td_oa.comments");
-			mysqlResultSet = mysqlPreparedStatement.executeQuery();
-			writeResultSet(mysqlResultSet);
-
-			// Remove again the insert comment
-			mysqlPreparedStatement = mysqlConnect.prepareStatement("delete from td_oa.comments where myuser=?; ");
-			mysqlPreparedStatement.setString(1, "Test");
-			mysqlPreparedStatement.executeUpdate();
-
-			mysqlResultSet = mysqlStatement.executeQuery("select * from td_oa.comments");
-			writeMetaData(mysqlResultSet);
+//			writeResultSet(mysqlResultSet);
+//
+//			// PreparedStatements can use variables and are more efficient
+//			mysqlPreparedStatement = mysqlConnect
+//					.prepareStatement("insert into  td_oa.comments values (default, ?, ?, ?, ? , ?, ?)");
+//			// "myuser, webpage, datum, summary, COMMENTS from
+//			// td_oa.comments");
+//			// Parameters start with 1
+//			Calendar cal = Calendar.getInstance();
+//			cal.set(2008, 1, 7, 1, 6, 7);
+//			long time = cal.getTime().getTime();
+//			
+//			mysqlPreparedStatement.setString(1, "Test");
+//			mysqlPreparedStatement.setString(2, "TestEmail");
+//			mysqlPreparedStatement.setString(3, "TestWebpage");
+//			mysqlPreparedStatement.setDate(4, new java.sql.Date(time));
+//			mysqlPreparedStatement.setString(5, "TestSummary");
+//			mysqlPreparedStatement.setString(6, "TestComment");
+//			mysqlPreparedStatement.executeUpdate();
+//
+//			mysqlPreparedStatement = mysqlConnect
+//					.prepareStatement("SELECT myuser, webpage, datum, summary, COMMENTS from td_oa.comments");
+//			mysqlResultSet = mysqlPreparedStatement.executeQuery();
+//			writeResultSet(mysqlResultSet);
+//
+//			// Remove again the insert comment
+//			mysqlPreparedStatement = mysqlConnect.prepareStatement("delete from td_oa.comments where myuser=?; ");
+//			mysqlPreparedStatement.setString(1, "Test");
+//			mysqlPreparedStatement.executeUpdate();
+//
+//			mysqlResultSet = mysqlStatement.executeQuery("select * from td_oa.comments");
+//			writeMetaData(mysqlResultSet);
 
 		} catch (Exception e) {
 			throw e;
