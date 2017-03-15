@@ -35,8 +35,9 @@ public class App {
 				sql = new StringBuilder().append("USE SampleDB; ").append("CREATE TABLE Employees ( ")
 						.append(" Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY, ").append(" Name NVARCHAR(50), ")
 						.append(" Location NVARCHAR(50) ").append("); ")
-						.append("INSERT INTO Employees (Name, Location) VALUES ").append("(N'Jared', N'Australia'), ")
-						.append("(N'Nikita', N'India'), ").append("(N'Tom', N'Germany'); ").toString();
+						.append("INSERT INTO Employees (Name, Location) VALUES (N'Jared', N'Australia');")
+						.append("INSERT INTO Employees (Name, Location) VALUES (N'Nikita', N'India');")
+						.append("INSERT INTO Employees (Name, Location) VALUES (N'Tom', N'Germany'); ").toString();
 				try (Statement statement = connection.createStatement()) {
 					statement.executeUpdate(sql);
 					System.out.println("Done.");
