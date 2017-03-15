@@ -3,8 +3,8 @@
 @2.找到Hanvon请假对应的数据（请假kqz_vacation、外出kqz_out；vacationtype表示假期类型，outtype表示外出类型；prdstatus表示是否同意，申请状态为0）
 @3.建立MYSQL数据库连接
 @4.建立MSSQL数据库连接
-5.建立KQZ_Vacation类
-6.区分MYSQL表单数据是否添加过（添加标记字段，数据库选择的时候据此选择）
+@5.建立KQZ_Vacation类
+6.区分MYSQL表单是否添加过（添加标记字段data_34，数据库选择据此选择）
 7.提取MYSQL未添加过的数据（起始日期，员工姓名，请假理由），保存到KQZ_Vacation类集合
 8.MYSQL添加过的数据增加标记
 9.将KQZ_Vacation类集合插入到MSSQL的KQZ_Vacation中
