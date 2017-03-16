@@ -9,4 +9,8 @@ INSERT INTO Employees(Name, Location) VALUES (N'Jared', N'Australia'),
 (N'Nikita', N'India'), (N'Tom', N'Germany');
 
 
-INSERT INTO [hwatt].[dbo].[KQZ_Vacation] ([EmployeeID], [VacationType], [PrdStatus], [ShiftDate], [IsDayAdjust], [BeginTime], [EndTime], [PrdLen], [BeginChk], [EndChk], [BeginSpan], [EndSpan], [BeginChkStatus], [EndChkStatus], [NewBeginTime], [NewEndTime], [BeginID], [EndID], [ISCHECK], [REASON], [createdtime]) VALUES ('1', '103', '2', '1', '2014-02-20 00:00:00.000', '1', '2014-02-20 00:00:00.000', '2014-02-20 23:59:59.000', '1439', '0', '0', '30', '30', '0', '0', '2014-02-20 00:00:00.000', '2014-02-20 23:59:59.000', '0', '0', '1', '', '2014-02-20 09:23:53.467');
+INSERT INTO [hwatt].[dbo].[KQZ_Vacation] ([EmployeeID], [VacationType],  
+
+[IsDayAdjust], [BeginTime], [EndTime], [NewBeginTime], [NewEndTime], 
+
+[ISCHECK], [REASON]) VALUES ('170', '2', '1', '2017-03-14 00:00:00.000', '2017-03-14 23:59:59.000', '2017-03-14 00:00:00.000', '2017-03-14 23:59:59.000', '0' ,'ฤ๊ผู');

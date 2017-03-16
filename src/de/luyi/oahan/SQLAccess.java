@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 public class SQLAccess {
@@ -20,7 +19,6 @@ public class SQLAccess {
 	private Connection mssqlConnect = null;
 	private Statement mssqlStatement = null;
 	private PreparedStatement mssqlPreparedStatement = null;
-	private ResultSet mssqlResultSet = null;
 	
 	public void readDataBase() throws Exception {
 		try {
@@ -42,7 +40,9 @@ public class SQLAccess {
 					+ "data_31 AS reason FROM flow_data_41 WHERE data_34=0;");
 			
 			mssqlPreparedStatement = mssqlConnect
-					.prepareStatement("insert into  hwatt.KQZ_Vacation values (default, ?, ?, ?, ? , ?, ?)");
+					.prepareStatement("INSERT INTO [hwatt].[dbo].[KQZ_Vacation] ([EmployeeID], "
+							+ "[VacationType], [IsDayAdjust], [BeginTime], [EndTime], [NewBeginTime], "
+							+ "[NewEndTime],[ISCHECK], [REASON]) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?);");
 			
 			DateFormat datefmtday = new SimpleDateFormat("yyyy年MM月dd日");
 			DateFormat datefmtbegin = new SimpleDateFormat("yyyy-MM-dd 00:00:00.000");
@@ -59,10 +59,19 @@ public class SQLAccess {
 				kva.setVacationType(mysqlResultSet.getString(5));
 				kva.setREASON(mysqlResultSet.getString(6));
 				
-				kva.setBeginTime();
-				kva.setEndTime();
-				kva.setNewBeginTime();
-				kva.setNewEndTime();
+				Date[] dayarr = kva.getVacationday();
+				for(int i=0; i<dayarr.length; i++) {
+					mssqlPreparedStatement.setInt(1, kva.getEmployeeID());
+					mssqlPreparedStatement.setShort(2, kva.getVacationType());
+					mssqlPreparedStatement.setShort(3, kva.getIsDayAdjust());
+					mssqlPreparedStatement.setString(4, datefmtbegin.format(dayarr[i]));
+					mssqlPreparedStatement.setString(5, datefmtend.format(dayarr[i]));
+					mssqlPreparedStatement.setString(6, datefmtbegin.format(dayarr[i]));
+					mssqlPreparedStatement.setString(7, datefmtend.format(dayarr[i]));
+					mssqlPreparedStatement.setShort(8, kva.getISCHECK());
+					mssqlPreparedStatement.setString(9, kva.getREASON());
+					mssqlPreparedStatement.execute();
+				}
 			}
 
 //			writeResultSet(mysqlResultSet);
