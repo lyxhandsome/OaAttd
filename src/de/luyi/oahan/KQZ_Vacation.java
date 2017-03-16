@@ -1,19 +1,23 @@
 package de.luyi.oahan;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class KQZ_Vacation {
 	private int EmployeeID;
-	private int VacationType;
-	private String REASON;
+	private String Name;
 	private Date BeginDay;
 	private Date EndDay;
+	private String VacationType;
+	private String REASON;
 	
 	private short PrdStatus;
 	private Date ShiftDate;
 	private short IsDayAdjust;
-	private Date BeginTime;
-	private Date EndTime;
 	private int PrdLen;
 	private short BeginChk;
 	private short EndChk;
@@ -21,8 +25,6 @@ public class KQZ_Vacation {
 	private int EndSpan;
 	private short BeginChkStatus;
 	private short EndChkStatus;
-	private Date NewBeginTime;
-	private Date NewEndTime;
 	private long BeginID;
 	private long EndID;
 	private short ISCHECK;
@@ -30,8 +32,14 @@ public class KQZ_Vacation {
 	
 	public KQZ_Vacation() {
 		EmployeeID = 0;
+		Name = null;
+		BeginDay = null;
+		EndDay = null;
+		VacationType = null;
+		REASON = null;
 		PrdStatus = 0;
-		IsDayAdjust = 0;
+		ShiftDate = new Date();
+		IsDayAdjust = 0;	
 		PrdLen = 0;
 		BeginChk = 0;
 		EndChk = 0;
@@ -41,15 +49,33 @@ public class KQZ_Vacation {
 		EndChkStatus = 0;
 		BeginID = 0;
 		EndID = 0;
-		ISCHECK = 1;
+		ISCHECK = 0;
+		createdtime = new Date();
 	}
+	
 
 	public void setEmployeeID(int employeeID) {
 		EmployeeID = employeeID;
 	}
 
-	public void setVacationType(int vacationType) {
+	public void setName(String name) {
+		Name = name;
+	}
+
+	public void setBeginDay(Date beginDay) {
+		BeginDay = beginDay;
+	}
+
+	public void setEndDay(Date endDay) {
+		EndDay = endDay;
+	}
+
+	public void setVacationType(String vacationType) {
 		VacationType = vacationType;
+	}
+
+	public void setREASON(String rEASON) {
+		REASON = rEASON;
 	}
 
 	public void setPrdStatus(short prdStatus) {
@@ -62,14 +88,6 @@ public class KQZ_Vacation {
 
 	public void setIsDayAdjust(short isDayAdjust) {
 		IsDayAdjust = isDayAdjust;
-	}
-
-	public void setBeginTime(Date beginTime) {
-		BeginTime = beginTime;
-	}
-
-	public void setEndTime(Date endTime) {
-		EndTime = endTime;
 	}
 
 	public void setPrdLen(int prdLen) {
@@ -100,14 +118,6 @@ public class KQZ_Vacation {
 		EndChkStatus = endChkStatus;
 	}
 
-	public void setNewBeginTime(Date newBeginTime) {
-		NewBeginTime = newBeginTime;
-	}
-
-	public void setNewEndTime(Date newEndTime) {
-		NewEndTime = newEndTime;
-	}
-
 	public void setBeginID(long beginID) {
 		BeginID = beginID;
 	}
@@ -120,10 +130,6 @@ public class KQZ_Vacation {
 		ISCHECK = iSCHECK;
 	}
 
-	public void setREASON(String rEASON) {
-		REASON = rEASON;
-	}
-
 	public void setCreatedtime(Date createdtime) {
 		this.createdtime = createdtime;
 	}
@@ -132,8 +138,24 @@ public class KQZ_Vacation {
 		return EmployeeID;
 	}
 
-	public int getVacationType() {
+	public String getName() {
+		return Name;
+	}
+
+	public Date getBeginDay() {
+		return BeginDay;
+	}
+
+	public Date getEndDay() {
+		return EndDay;
+	}
+
+	public String getVacationType() {
 		return VacationType;
+	}
+
+	public String getREASON() {
+		return REASON;
 	}
 
 	public short getPrdStatus() {
@@ -146,14 +168,6 @@ public class KQZ_Vacation {
 
 	public short getIsDayAdjust() {
 		return IsDayAdjust;
-	}
-
-	public Date getBeginTime() {
-		return BeginTime;
-	}
-
-	public Date getEndTime() {
-		return EndTime;
 	}
 
 	public int getPrdLen() {
@@ -184,14 +198,6 @@ public class KQZ_Vacation {
 		return EndChkStatus;
 	}
 
-	public Date getNewBeginTime() {
-		return NewBeginTime;
-	}
-
-	public Date getNewEndTime() {
-		return NewEndTime;
-	}
-
 	public long getBeginID() {
 		return BeginID;
 	}
@@ -204,12 +210,7 @@ public class KQZ_Vacation {
 		return ISCHECK;
 	}
 
-	public String getREASON() {
-		return REASON;
-	}
-
 	public Date getCreatedtime() {
 		return createdtime;
 	}
-
 }

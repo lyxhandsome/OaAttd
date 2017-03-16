@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -20,14 +22,13 @@ public class SQLAccess {
 	private PreparedStatement mssqlPreparedStatement = null;
 	private ResultSet mssqlResultSet = null;
 	
-	private KQZ_Vacation kva;
-
 	public void readDataBase() throws Exception {
 		try {
 			// This will load the MySQL driver, each DB has its own driver
 			Class.forName("com.mysql.jdbc.Driver");
 			// Setup the connection with the DB
-			mysqlConnect = DriverManager.getConnection("jdbc:mysql://localhost:3336/td_oa?" + "user=root&password=myoa888");
+			mysqlConnect = DriverManager.getConnection("jdbc:mysql://localhost:3336/td_oa?" 
+					+ "user=root&password=myoa888");
 			
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  
 			mssqlConnect = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;"
@@ -36,12 +37,34 @@ public class SQLAccess {
 			// Statements allow to issue SQL queries to the database
 			mysqlStatement = mysqlConnect.createStatement();
 			// Result set get the result of the SQL query
-			mysqlResultSet = mysqlStatement.executeQuery("SELECT * FROM flow_data_41 WHERE data_34=0;");
-			while (mysqlResultSet.next()) {
-				kva.setEmployeeID(mysqlResultSet.getInt(2));
-				
-			}
+			mysqlResultSet = mysqlStatement.executeQuery("SELECT begin_user as employeeid, "
+					+ "data_4 as name, data_26 beginday, data_27 as endday, data_22 AS vacationtype, "
+					+ "data_31 AS reason FROM flow_data_41 WHERE data_34=0;");
 			
+			mssqlPreparedStatement = mssqlConnect
+					.prepareStatement("insert into  hwatt.KQZ_Vacation values (default, ?, ?, ?, ? , ?, ?)");
+			
+			DateFormat datefmtday = new SimpleDateFormat("yyyy年MM月dd日");
+			DateFormat datefmtbegin = new SimpleDateFormat("yyyy-MM-dd 00:00:00.000");
+			DateFormat datefmtend = new SimpleDateFormat("yyyy-MM-dd 23:59:59.000");
+			DateFormat datefmtsql = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+			
+			KQZ_Vacation kva = new KQZ_Vacation();
+			
+			while (mysqlResultSet.next()) {
+				kva.setEmployeeID(mysqlResultSet.getInt(1));
+				kva.setName(mysqlResultSet.getString(2));
+				kva.setBeginDay(datefmtday.parse(mysqlResultSet.getString(3)));
+				kva.setEndDay(datefmtday.parse(mysqlResultSet.getString(4)));
+				kva.setVacationType(mysqlResultSet.getString(5));
+				kva.setREASON(mysqlResultSet.getString(6));
+				
+				kva.setBeginTime();
+				kva.setEndTime();
+				kva.setNewBeginTime();
+				kva.setNewEndTime();
+			}
+
 //			writeResultSet(mysqlResultSet);
 //
 //			// PreparedStatements can use variables and are more efficient
