@@ -5,14 +5,12 @@
 @4.建立MSSQL数据库连接
 @5.建立KQZ_Vacation类
 @6.区分MYSQL表单是否添加过（添加标记字段data_34，数据库选择据此选择）
-@7.提取MYSQL未添加过的数据（起始日期，员工姓名，请假理由），保存到KQZ_Vacation类集合
-
-
-一段日期拆分成几个日子，逐个添加
-
-
-8.将KQZ_Vacation类集合插入到MSSQL的KQZ_Vacation中
+@7.提取MYSQL未添加过的数据（起始日期，员工姓名，请假理由），一段日期拆分成几个日子，逐个添加
+@8.将KQZ_Vacation类集合插入到MSSQL的KQZ_Vacation中
 9.MYSQL添加过的数据增加标记
 10.CLOSE()函数关闭连接
 二.汉王考勤体现到OA
 考勤不必修改OA，因为考勤报表能够反映有无缺勤，销假即使自动生成日期，也必须手动提交流程
+
+USE TD_OA;
+CREATE TABLE OA_Hanvon(Hanvon_User_ID int(11) NOT NULL, OA_User_ID int(11) NOT NULL, UNIQUE KEY (User_ID, Employee_ID)) ENGINE=MyISAM DEFAULT CHARSET=gbk;

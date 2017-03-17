@@ -46,11 +46,8 @@ public class SQLAccess {
 			
 			DateFormat datefmtday = new SimpleDateFormat("yyyy年MM月dd日");
 			DateFormat datefmtbegin = new SimpleDateFormat("yyyy-MM-dd 00:00:00.000");
-			DateFormat datefmtend = new SimpleDateFormat("yyyy-MM-dd 23:59:59.000");
-			DateFormat datefmtsql = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-			
+			DateFormat datefmtend = new SimpleDateFormat("yyyy-MM-dd 23:59:59.000");			
 			KQZ_Vacation kva = new KQZ_Vacation();
-			
 			while (mysqlResultSet.next()) {
 				kva.setEmployeeID(mysqlResultSet.getInt(1));
 				kva.setName(mysqlResultSet.getString(2));
