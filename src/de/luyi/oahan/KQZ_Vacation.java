@@ -1,5 +1,7 @@
 package de.luyi.oahan;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class KQZ_Vacation {
@@ -22,21 +24,20 @@ public class KQZ_Vacation {
 		ISCHECK = 0;
 	}
 	
-	public Date[] getVacationday() {
-		if(BeginDay == null || EndDay == null) {
-			return new Date[0];
-		}
-	
-		long dayms = 1000*60*60*24;
-		long buf = BeginDay.getTime();
-		int days = (int) ((EndDay.getTime() - BeginDay.getTime())/dayms);
-		Date[] dateArr = new Date[days+1];
-		for(int i=0; i<days+1; i++) {
-			dateArr[i] = new Date();
-			dateArr[i].setTime(buf);
-			buf = buf+dayms;
-		}
-		return dateArr;
+	public ArrayList<Date> getVacationday() {
+		ArrayList<Date> dateArrl = new ArrayList<Date>();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(BeginDay);
+		dateArrl.add(BeginDay);
+		do {
+			cal.add(Calendar.DATE, 1);
+			if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY)
+				cal.add(Calendar.DATE, 1);
+			else
+				dateArrl.add(cal.getTime());
+		} while (!cal.getTime().equals(EndDay));
+		
+		return dateArrl;
 	}
 
 	public void setEmployeeID(int employeeID) {

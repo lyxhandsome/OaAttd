@@ -8,7 +8,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 public class SQLAccess {
 	private Connection mysqlConnect = null;
@@ -35,7 +37,7 @@ public class SQLAccess {
 			// Statements allow to issue SQL queries to the database
 			mysqlStatement = mysqlConnect.createStatement();
 			// Result set get the result of the SQL query
-			mysqlResultSet = mysqlStatement.executeQuery("SELECT data_37 as employeeid, "
+			mysqlResultSet = mysqlStatement.executeQuery("SELECT data_35 as employeeid, "
 					+ "data_26 beginday, data_27 as endday, data_22 AS vacationtype, "
 					+ "data_31 AS reason FROM flow_data_41 WHERE data_34=0;");
 			
@@ -55,15 +57,17 @@ public class SQLAccess {
 				kva.setVacationType(mysqlResultSet.getString(4));
 				kva.setREASON(mysqlResultSet.getString(5));
 				
-				Date[] dayarr = kva.getVacationday();
-				for(int i=0; i<dayarr.length; i++) {
+				ArrayList<Date> dayarrl = kva.getVacationday();
+				Iterator<Date> it = dayarrl.iterator();
+				while(it.hasNext()) {
+					Date vacday = it.next();
 					mssqlPreparedStatement.setInt(1, kva.getEmployeeID());
 					mssqlPreparedStatement.setShort(2, kva.getVacationType());
 					mssqlPreparedStatement.setShort(3, kva.getIsDayAdjust());
-					mssqlPreparedStatement.setString(4, datefmtbegin.format(dayarr[i]));
-					mssqlPreparedStatement.setString(5, datefmtend.format(dayarr[i]));
-					mssqlPreparedStatement.setString(6, datefmtbegin.format(dayarr[i]));
-					mssqlPreparedStatement.setString(7, datefmtend.format(dayarr[i]));
+					mssqlPreparedStatement.setString(4, datefmtbegin.format(vacday));
+					mssqlPreparedStatement.setString(5, datefmtend.format(vacday));
+					mssqlPreparedStatement.setString(6, datefmtbegin.format(vacday));
+					mssqlPreparedStatement.setString(7, datefmtend.format(vacday));
 					mssqlPreparedStatement.setShort(8, kva.getISCHECK());
 					mssqlPreparedStatement.setString(9, kva.getREASON());
 					mssqlPreparedStatement.execute();
