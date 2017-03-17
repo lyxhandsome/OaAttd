@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class KQZ_Vacation {
 	private int EmployeeID;
-	private String Name;
 	private Date BeginDay;
 	private Date EndDay;
 	private short VacationType;
@@ -15,7 +14,6 @@ public class KQZ_Vacation {
 	
 	public KQZ_Vacation() {
 		EmployeeID = 0;
-		Name = null;
 		BeginDay = null;
 		EndDay = null;
 		VacationType = 0;
@@ -43,10 +41,6 @@ public class KQZ_Vacation {
 
 	public void setEmployeeID(int employeeID) {
 		EmployeeID = employeeID;
-	}
-
-	public void setName(String name) {
-		Name = name;
 	}
 
 	public void setBeginDay(Date beginDay) {
@@ -101,10 +95,6 @@ public class KQZ_Vacation {
 
 	public int getEmployeeID() {
 		return EmployeeID;
-	}
-
-	public String getName() {
-		return Name;
 	}
 
 	public Date getBeginDay() {

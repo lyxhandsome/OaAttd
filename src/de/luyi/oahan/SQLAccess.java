@@ -35,8 +35,8 @@ public class SQLAccess {
 			// Statements allow to issue SQL queries to the database
 			mysqlStatement = mysqlConnect.createStatement();
 			// Result set get the result of the SQL query
-			mysqlResultSet = mysqlStatement.executeQuery("SELECT begin_user as employeeid, "
-					+ "data_4 as name, data_26 beginday, data_27 as endday, data_22 AS vacationtype, "
+			mysqlResultSet = mysqlStatement.executeQuery("SELECT data_37 as employeeid, "
+					+ "data_26 beginday, data_27 as endday, data_22 AS vacationtype, "
 					+ "data_31 AS reason FROM flow_data_41 WHERE data_34=0;");
 			
 			mssqlPreparedStatement = mssqlConnect
@@ -50,11 +50,10 @@ public class SQLAccess {
 			KQZ_Vacation kva = new KQZ_Vacation();
 			while (mysqlResultSet.next()) {
 				kva.setEmployeeID(mysqlResultSet.getInt(1));
-				kva.setName(mysqlResultSet.getString(2));
-				kva.setBeginDay(datefmtday.parse(mysqlResultSet.getString(3)));
-				kva.setEndDay(datefmtday.parse(mysqlResultSet.getString(4)));
-				kva.setVacationType(mysqlResultSet.getString(5));
-				kva.setREASON(mysqlResultSet.getString(6));
+				kva.setBeginDay(datefmtday.parse(mysqlResultSet.getString(2)));
+				kva.setEndDay(datefmtday.parse(mysqlResultSet.getString(3)));
+				kva.setVacationType(mysqlResultSet.getString(4));
+				kva.setREASON(mysqlResultSet.getString(5));
 				
 				Date[] dayarr = kva.getVacationday();
 				for(int i=0; i<dayarr.length; i++) {
