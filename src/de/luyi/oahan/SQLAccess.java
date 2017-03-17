@@ -73,6 +73,8 @@ public class SQLAccess {
 					mssqlPreparedStatement.execute();
 				}
 			}
+			
+			mysqlStatement.execute("UPDATE flow_data_41 SET data_34=1;");
 
 		} catch (Exception e) {
 			throw e;
