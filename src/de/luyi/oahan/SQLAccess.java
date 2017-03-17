@@ -70,39 +70,6 @@ public class SQLAccess {
 				}
 			}
 
-//			writeResultSet(mysqlResultSet);
-//
-//			// PreparedStatements can use variables and are more efficient
-//			mysqlPreparedStatement = mysqlConnect
-//					.prepareStatement("insert into  td_oa.comments values (default, ?, ?, ?, ? , ?, ?)");
-//			// "myuser, webpage, datum, summary, COMMENTS from
-//			// td_oa.comments");
-//			// Parameters start with 1
-//			Calendar cal = Calendar.getInstance();
-//			cal.set(2008, 1, 7, 1, 6, 7);
-//			long time = cal.getTime().getTime();
-//			
-//			mysqlPreparedStatement.setString(1, "Test");
-//			mysqlPreparedStatement.setString(2, "TestEmail");
-//			mysqlPreparedStatement.setString(3, "TestWebpage");
-//			mysqlPreparedStatement.setDate(4, new java.sql.Date(time));
-//			mysqlPreparedStatement.setString(5, "TestSummary");
-//			mysqlPreparedStatement.setString(6, "TestComment");
-//			mysqlPreparedStatement.executeUpdate();
-//
-//			mysqlPreparedStatement = mysqlConnect
-//					.prepareStatement("SELECT myuser, webpage, datum, summary, COMMENTS from td_oa.comments");
-//			mysqlResultSet = mysqlPreparedStatement.executeQuery();
-//			writeResultSet(mysqlResultSet);
-//
-//			// Remove again the insert comment
-//			mysqlPreparedStatement = mysqlConnect.prepareStatement("delete from td_oa.comments where myuser=?; ");
-//			mysqlPreparedStatement.setString(1, "Test");
-//			mysqlPreparedStatement.executeUpdate();
-//
-//			mysqlResultSet = mysqlStatement.executeQuery("select * from td_oa.comments");
-//			writeMetaData(mysqlResultSet);
-
 		} catch (Exception e) {
 			throw e;
 		} finally {
