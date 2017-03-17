@@ -78,36 +78,6 @@ public class SQLAccess {
 
 	}
 
-	private void writeMetaData(ResultSet mysqlResultSet) throws SQLException {
-		// Now get some metadata from the database
-		// Result set get the result of the SQL query
-		System.out.println("The columns in the table are: ");
-		System.out.println("Table: " + mysqlResultSet.getMetaData().getTableName(1));
-		for (int i = 1; i <= mysqlResultSet.getMetaData().getColumnCount(); i++) {
-			System.out.println("Column " + i + " " + mysqlResultSet.getMetaData().getColumnName(i));
-		}
-	}
-
-	private void writeResultSet(ResultSet mysqlResultSet) throws SQLException {
-		// ResultSet is initially before the first data set
-		while (mysqlResultSet.next()) {
-			// It is possible to get the columns via name
-			// also possible to get the columns via the column number
-			// which starts at 1
-			// e.g. mysqlResultSet.getSTring(2);
-			String user = mysqlResultSet.getString("myuser");
-			String website = mysqlResultSet.getString("webpage");
-			String summary = mysqlResultSet.getString("summary");
-			Date date = mysqlResultSet.getDate("datum");
-			String comment = mysqlResultSet.getString("comments");
-			System.out.println("User: " + user);
-			System.out.println("Website: " + website);
-			System.out.println("summary: " + summary);
-			System.out.println("Date: " + date);
-			System.out.println("Comment: " + comment);
-		}
-	}
-
 	// You need to close the mysqlResultSet
 	private void close() {
 		try {
