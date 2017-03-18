@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -15,11 +14,9 @@ import java.util.Iterator;
 public class SQLAccess {
 	private Connection mysqlConnect = null;
 	private Statement mysqlStatement = null;
-	private PreparedStatement mysqlPreparedStatement = null;
 	private ResultSet mysqlResultSet = null;
 	
 	private Connection mssqlConnect = null;
-	private Statement mssqlStatement = null;
 	private PreparedStatement mssqlPreparedStatement = null;
 	
 	public void readDataBase() throws Exception {
