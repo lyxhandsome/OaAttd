@@ -39,7 +39,8 @@ public class SQLAccess {
 			// Result set get the result of the SQL query
 			mysqlResultSet = mysqlStatement.executeQuery("SELECT data_35 as employeeid, "
 					+ "data_26 beginday, data_27 as endday, data_22 AS vacationtype, "
-					+ "data_31 AS reason FROM flow_data_41 WHERE data_15<>'' and data_34=0;");
+					+ "data_31 AS reason FROM flow_data_41 WHERE data_35<>''&&data_26<>''"
+					+ "&&data_27<>''&&data_22<>''&&(data_15<>''||data_16<>'')&&data_34=0;");
 			
 			mssqlPreparedStatement = mssqlConnect
 					.prepareStatement("INSERT INTO [hwatt].[dbo].[KQZ_Vacation] ([EmployeeID], "
@@ -74,7 +75,7 @@ public class SQLAccess {
 				}
 			}
 			
-			mysqlStatement.execute("UPDATE flow_data_41 SET data_34=1;");
+			mysqlStatement.execute("UPDATE flow_data_41 SET data_34=1 WHERE data_15<>''||data_16<>'';");
 
 		} catch (Exception e) {
 			throw e;
