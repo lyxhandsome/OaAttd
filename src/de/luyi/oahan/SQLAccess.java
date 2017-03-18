@@ -39,7 +39,7 @@ public class SQLAccess {
 			// Result set get the result of the SQL query
 			mysqlResultSet = mysqlStatement.executeQuery("SELECT data_35 as employeeid, "
 					+ "data_26 beginday, data_27 as endday, data_22 AS vacationtype, "
-					+ "data_31 AS reason FROM flow_data_41 WHERE data_34=0;");
+					+ "data_31 AS reason FROM flow_data_41 WHERE data_15<>'' and data_34=0;");
 			
 			mssqlPreparedStatement = mssqlConnect
 					.prepareStatement("INSERT INTO [hwatt].[dbo].[KQZ_Vacation] ([EmployeeID], "
