@@ -73,7 +73,8 @@ public class SQLAccess {
 				}
 			}
 			
-			mysqlStatement.execute("UPDATE flow_data_41 SET data_34=1 WHERE data_15<>''||data_16<>'';");
+			mysqlStatement.execute("UPDATE flow_data_41 SET data_34=1 WHERE data_35<>''&&data_26<>''"
+					+ "&&data_27<>''&&data_22<>''&&(data_15<>''||data_16<>'')&&data_34=0;");
 
 		} catch (Exception e) {
 			throw e;
